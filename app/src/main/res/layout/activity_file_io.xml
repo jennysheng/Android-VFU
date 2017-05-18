@@ -17,11 +17,11 @@
 
 
     <Button
-        android:id="@+id/Reade_externalButton"
+        android:id="@+id/Read_externalButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Read_external"
-        tools:layout_editor_absoluteX="213dp"
+        tools:layout_editor_absoluteX="210dp"
         tools:layout_editor_absoluteY="16dp" />
 
 </android.support.constraint.ConstraintLayout>

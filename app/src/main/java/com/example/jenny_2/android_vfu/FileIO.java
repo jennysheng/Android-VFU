@@ -22,7 +22,7 @@ public class FileIO extends AppCompatActivity {
 
         final TextView dataText=(TextView)findViewById(R.id.dataText);
 
-        final Button button2 = (Button) findViewById(R.id.Reade_externalButton);
+        final Button button2 = (Button) findViewById(R.id.Read_externalButton);
         button2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 //Pick a file from SD card using Intent
