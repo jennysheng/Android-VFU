@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.jenny_2.android_vfu"
-        minSdkVersion 9
+        minSdkVersion 10
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
@@ -27,6 +27,12 @@ android {
     }
 }
 
+        repositories {
+                maven{
+                        url 'https://dl.bintray.com/sj/maven/'
+                }
+        }
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
@@ -34,5 +40,6 @@ dependencies {
     })
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile 'com.numetriclabz.numandroidcharts:numandroidcharts:1.0.4'
     testCompile 'junit:junit:4.12'
 }

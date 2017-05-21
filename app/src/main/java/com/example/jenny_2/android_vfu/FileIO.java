@@ -21,7 +21,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
-import static com.example.jenny_2.android_vfu.R.id.dataText;
+
 
 public class FileIO extends AppCompatActivity {
     TextView dataText = null;
