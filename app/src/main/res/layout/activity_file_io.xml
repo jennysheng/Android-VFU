@@ -14,11 +14,7 @@
         android:text="Read_external"
         tools:layout_editor_absoluteX="-1dp"
         tools:layout_editor_absoluteY="0dp" />
-    <br />
-    &lt;com.numetriclabz.numandroidcharts.MultiScatterChart<br />
-    android:layout_width=&quot;match_parent&quot;<br />
-    android:layout_height=&quot;400dp&quot;<br />
-    android:id=&quot;@+id/chart&quot; /&gt;
+
 
 
 </android.support.constraint.ConstraintLayout>
