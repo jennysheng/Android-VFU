@@ -2,25 +2,18 @@ package com.example.jenny_2.android_vfu;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.ParseException;
 import android.net.Uri;
-import android.provider.OpenableColumns;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.List;
+
 
 
 public class FileIO extends AppCompatActivity {
@@ -28,14 +21,15 @@ public class FileIO extends AppCompatActivity {
 
     private static final int REQUESTCODE_PICK_TEXTFILE = 1;
     ArrayList<DataLogger> channelsdata = new ArrayList<>();
-    private ArrayList<Double> channel1list = new ArrayList<>();
-    private ArrayList<Double> channel2list = new ArrayList<>();
-    private ArrayList<Double> channel3list = new ArrayList<>();
-    private ArrayList<Double> channel4list = new ArrayList<>();
-    private ArrayList<Double> channel5list = new ArrayList<>();
-    private ArrayList<Double> channel6list = new ArrayList<>();
-    private ArrayList<Double> channel7list = new ArrayList<>();
-    private ArrayList<Double> channel8list = new ArrayList<>();
+    private ArrayList<String> channel1list = new ArrayList<>();
+    private ArrayList<String> channel2list = new ArrayList<>();
+    private ArrayList<String> channel3list = new ArrayList<>();
+    private ArrayList<String> channel4list = new ArrayList<>();
+    private ArrayList<String> channel5list = new ArrayList<>();
+    private ArrayList<String> channel6list = new ArrayList<>();
+    private ArrayList<String> channel7list = new ArrayList<>();
+    private ArrayList<String> channel8list = new ArrayList<>();
+
 
 
     @Override
@@ -43,6 +37,7 @@ public class FileIO extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_file_io);
         final Button button2 = (Button) findViewById(R.id.Read_externalButton);
+
         button2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // to retrieve a file from another app
@@ -50,13 +45,15 @@ public class FileIO extends AppCompatActivity {
                 textFileIntent.setType("text/*");
                 startActivityForResult(textFileIntent, REQUESTCODE_PICK_TEXTFILE);
 
+
+
             }
         });
-        final Button button3=(Button)findViewById(R.id.buttonShow);
+        final Button button3 = (Button) findViewById(R.id.buttonShow);
         button3.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),Scatterchart.class);
-                intent.putExtra("channel1data",  channel1list);
+                Intent intent = new Intent(getApplicationContext(), Scatterchart.class);
+                intent.putStringArrayListExtra("channel1data", channel1list);
                 startActivity(intent);
             }
         });
@@ -73,6 +70,8 @@ public class FileIO extends AppCompatActivity {
             try {
                 readTextFromUri(uri);
                 createchart();
+
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -100,15 +99,8 @@ public class FileIO extends AppCompatActivity {
 
         while (i < ((j - 1) * 9)) {
 
-            channelsdata.add(new DataLogger(parts[i],
-                    Double.parseDouble(parts[i + 1]),
-                    Double.parseDouble(parts[i + 2]),
-                    Double.parseDouble(parts[i + 3]),
-                    Double.parseDouble(parts[i + 4]),
-                    Double.parseDouble(parts[i + 5]),
-                    Double.parseDouble(parts[i + 6]),
-                    Double.parseDouble(parts[i + 7]),
-                    Double.parseDouble(parts[i + 8])));
+            channelsdata.add(new DataLogger(parts[i], parts[i + 1], parts[i + 2], parts[i + 3], parts[i + 4], parts[i + 5], parts[i + 6], parts[i + 7], parts[i + 8]));
+
             i += 9;
         }
 
@@ -121,6 +113,7 @@ public class FileIO extends AppCompatActivity {
     }
 
     private void createchart() {
+
 // add jackoption to build.gradle to enable this method
         getChannelsdata().stream().forEach((c) -> {
             channel1list.add(c.getValue1());
@@ -131,6 +124,7 @@ public class FileIO extends AppCompatActivity {
             channel6list.add(c.getValue6());
             channel7list.add(c.getValue7());
             channel8list.add(c.getValue8());
+
 
         });
     }
