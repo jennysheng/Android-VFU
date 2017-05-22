@@ -12,17 +12,21 @@
         <activity android:name=".FileIO">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.GET_CONTENT" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.ACTIVITY" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
 
         </activity>
         <activity android:name=".Scatterchart" />
+
     </application>
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />

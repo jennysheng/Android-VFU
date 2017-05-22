@@ -20,11 +20,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-
+import java.util.List;
 
 
 public class FileIO extends AppCompatActivity {
-    TextView dataText = null;
+
 
     private static final int REQUESTCODE_PICK_TEXTFILE = 1;
     ArrayList<DataLogger> channelsdata = new ArrayList<>();
@@ -36,15 +36,12 @@ public class FileIO extends AppCompatActivity {
     private ArrayList<Double> channel6list = new ArrayList<>();
     private ArrayList<Double> channel7list = new ArrayList<>();
     private ArrayList<Double> channel8list = new ArrayList<>();
-    //public ArrayList<ScatterChart.Series> scatterchartseries = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_file_io);
-        dataText = (TextView) findViewById(R.id.dataText);
-
-
         final Button button2 = (Button) findViewById(R.id.Read_externalButton);
         button2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -52,6 +49,15 @@ public class FileIO extends AppCompatActivity {
                 Intent textFileIntent = new Intent(Intent.ACTION_GET_CONTENT);
                 textFileIntent.setType("text/*");
                 startActivityForResult(textFileIntent, REQUESTCODE_PICK_TEXTFILE);
+
+            }
+        });
+        final Button button3=(Button)findViewById(R.id.buttonShow);
+        button3.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),Scatterchart.class);
+                intent.putExtra("channel1data",  channel1list);
+                startActivity(intent);
             }
         });
 
@@ -76,6 +82,7 @@ public class FileIO extends AppCompatActivity {
     private ArrayList<DataLogger> readTextFromUri(Uri uri) throws IOException {
 
         InputStream inputStream = getContentResolver().openInputStream(uri);
+        assert inputStream != null;
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
         StringBuilder filecontent = new StringBuilder();
         String line = reader.readLine();

@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Android-Vfu</string>
+    <string name="read_external">Read_external</string>
 </resources>
