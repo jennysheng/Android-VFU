@@ -54,6 +54,13 @@ public class FileIO extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), Scatterchart.class);
                 intent.putStringArrayListExtra("channel1data", channel1list);
+                intent.putStringArrayListExtra("channel2data", channel2list);
+                intent.putStringArrayListExtra("channel3data", channel3list);
+                intent.putStringArrayListExtra("channel4data", channel4list);
+                intent.putStringArrayListExtra("channel5data", channel5list);
+                intent.putStringArrayListExtra("channel6data", channel6list);
+                intent.putStringArrayListExtra("channel7data", channel7list);
+                intent.putStringArrayListExtra("channel8data", channel8list);
                 startActivity(intent);
             }
         });
@@ -70,8 +77,6 @@ public class FileIO extends AppCompatActivity {
             try {
                 readTextFromUri(uri);
                 createchart();
-
-
             } catch (IOException e) {
                 e.printStackTrace();
             }
