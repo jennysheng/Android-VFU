@@ -152,10 +152,10 @@ public class Scatterchart extends AppCompatActivity implements View.OnClickListe
             entriesSingle.add(new Entry(Float.parseFloat(list8.get(i)), i));
             labels10.add(""+i);
         }
-          scatterChart.setData(null);
+        scatterChart.setData(null);
         seekBar = (SeekBar) findViewById(R.id.seekBar);
-        seekBar.incrementProgressBy(1000);
-        seekBar.setMax(40000);
+        seekBar.incrementProgressBy(10000);
+        seekBar.setMax(100000);
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -189,7 +189,7 @@ public class Scatterchart extends AppCompatActivity implements View.OnClickListe
                     btn1.setText("Off1");
 
                 } else {
-                    dataset.clear();
+                    dataset.setVisible(false);
                     btn1.setText("Channel1");
                 }
                 break;
@@ -203,10 +203,10 @@ public class Scatterchart extends AppCompatActivity implements View.OnClickListe
                     dataset2.setScatterShape(ScatterChart.ScatterShape.CROSS);
                     scatterChart.setData(data2);
                     btn2.setText("Off2");
-                    scatterChart.resetViewPortOffsets();
+
 
                 } else {
-                    dataset2.clear();
+                    dataset2.setVisible(false);
                     btn2.setText("Channel2");
                 }
                 break;
@@ -220,9 +220,9 @@ public class Scatterchart extends AppCompatActivity implements View.OnClickListe
                     dataset3.setScatterShape(ScatterChart.ScatterShape.SQUARE);
                     scatterChart.setData(data3);
                     btn3.setText("Off3");
-                    scatterChart.resetViewPortOffsets();
+
                 } else {
-                    dataset3.clear();
+                    dataset3.setVisible(false);
                     btn3.setText("Channel3");
                 }
                 break;
@@ -235,9 +235,9 @@ public class Scatterchart extends AppCompatActivity implements View.OnClickListe
                     dataset4.setScatterShape(ScatterChart.ScatterShape.TRIANGLE);
                     scatterChart.setData(data4);
                     btn4.setText("Off4");
-                    scatterChart.resetViewPortOffsets();
+
                 } else {
-                    dataset4.clear();
+                    dataset4.setVisible(false);
                     btn4.setText("Channel4");
                 }
                 break;
@@ -249,12 +249,11 @@ public class Scatterchart extends AppCompatActivity implements View.OnClickListe
                     dataset5.setColors(new int[]{colors[4]}); //
                     dataset5.setScatterShapeSize(10);
                     dataset5.setScatterShape(ScatterChart.ScatterShape.SQUARE);
-                    scatterChart.resetViewPortOffsets();
                     scatterChart.setData(data5);
                     btn5.setText("Off5");
 
                 } else {
-                    dataset5.clear();
+                    dataset5.setVisible(false);
                     btn5.setText("Channel5");
                 }
                 break;
@@ -266,12 +265,11 @@ public class Scatterchart extends AppCompatActivity implements View.OnClickListe
                     dataset6.setColors(new int[]{colors[5]}); //
                     dataset6.setScatterShapeSize(10);
                     dataset6.setScatterShape(ScatterChart.ScatterShape.CIRCLE);
-                    scatterChart.resetViewPortOffsets();
                     scatterChart.setData(data6);
                     btn6.setText("Off6");
 
                 } else {
-                    dataset6.clear();
+                    dataset6.setVisible(false);
                     btn6.setText("Channel6");
                 }
                 break;
@@ -283,12 +281,11 @@ public class Scatterchart extends AppCompatActivity implements View.OnClickListe
                     dataset7.setColors(new int[]{colors[6]}); //
                     dataset7.setScatterShapeSize(10);
                     dataset7.setScatterShape(ScatterChart.ScatterShape.TRIANGLE);
-                    scatterChart.resetViewPortOffsets();
                     scatterChart.setData(data7);
                     btn7.setText("Off7");
 
                 } else {
-                    dataset7.clear();
+                    dataset7.setVisible(false);
                     btn7.setText("Channel7");
                 }
                 break;
@@ -302,9 +299,9 @@ public class Scatterchart extends AppCompatActivity implements View.OnClickListe
                     dataset8.setScatterShape(ScatterChart.ScatterShape.CROSS);
                     scatterChart.setData(data8);
                     btn8.setText("Off8");
-                    scatterChart.resetViewPortOffsets();
+
                 } else {
-                    dataset8.clear();
+                    dataset8.setVisible(false);
                     btn8.setText("Channel8");
                 }
                 break;
@@ -321,7 +318,7 @@ public class Scatterchart extends AppCompatActivity implements View.OnClickListe
                     btn10.setText("offSingle");
                     scatterChart.resetViewPortOffsets();
                 } else {
-                    dataset10.clear();
+                    dataset10.setVisible(false);
                     btn10.setText("Single");
                 }
                 break;
