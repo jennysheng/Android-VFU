@@ -2,6 +2,7 @@ package com.example.jenny_2.android_vfu;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatActivity;
@@ -35,6 +36,15 @@ public class Scatterchart extends AppCompatActivity implements View.OnClickListe
     ScatterDataSet dataset;
     ScatterData data;
     SeekBar seekBar;
+    int[] colors = new int[] {
+            Color.rgb(255,0,0),//red
+            Color.rgb(255,153,0),//orange
+            Color.rgb(0,204,0),//green
+            Color.rgb(255,255,0),//light blue
+            Color.rgb(102,51,0),//black
+            Color.rgb(0,0,255),//dark blue
+            Color.rgb(102,0,102),//purple
+            Color.rgb(255,0,255)};//pink
 
 
     @Override
@@ -45,7 +55,7 @@ public class Scatterchart extends AppCompatActivity implements View.OnClickListe
         btn1.setOnClickListener(this);
         seekBar = (SeekBar) findViewById(R.id.seekBar);
         seekBar.incrementProgressBy(10000);
-        seekBar.setMax(40000);
+        seekBar.setMax(400000);
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 
             @Override
@@ -71,14 +81,12 @@ public class Scatterchart extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
 
         if (btn1.getText().equals("Channel1")) {
-
             scatterChart = (ScatterChart) findViewById(R.id.chart);
             Intent intent = getIntent();
             Bundle bundle = intent.getExtras();
             if (bundle != null) {
                 list1 = bundle.getStringArrayList("channel1data");
             }
-
             entries = new ArrayList<>();
             labels = new ArrayList<String>();
             for (int i = 0; i < list1.size(); i++) {
@@ -87,11 +95,10 @@ public class Scatterchart extends AppCompatActivity implements View.OnClickListe
             }
             dataset = new ScatterDataSet(entries, "channel1");
             data = new ScatterData(labels, dataset);
-           // dataset.setColors(new int[]{ColorTemplate.getHoloBlue()}); //
+            dataset.setColors(new int[]{colors[0]}); //
             dataset.setScatterShapeSize(10);
             dataset.setScatterShape(ScatterChart.ScatterShape.CIRCLE);
             scatterChart.setData(data);
-
             btn1.setText("Off1");
 
         } else {
