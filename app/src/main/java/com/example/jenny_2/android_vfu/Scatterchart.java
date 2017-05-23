@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.SeekBar;
 
 
 import com.github.mikephil.charting.charts.ScatterChart;
@@ -28,11 +29,13 @@ import java.util.ArrayList;
 public class Scatterchart extends AppCompatActivity implements View.OnClickListener {
     ArrayList<String> list1;
     Button btn1 = null;
-    ScatterChart scatterChart ;
-    ArrayList<Entry> entries ;
-    ArrayList<String> labels ;
+    ScatterChart scatterChart;
+    ArrayList<Entry> entries;
+    ArrayList<String> labels;
     ScatterDataSet dataset;
     ScatterData data;
+    SeekBar seekBar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,10 +43,31 @@ public class Scatterchart extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.scatterchart);
         btn1 = (Button) findViewById(R.id.button1);
         btn1.setOnClickListener(this);
+        seekBar = (SeekBar) findViewById(R.id.seekBar);
+        seekBar.incrementProgressBy(10000);
+        seekBar.setMax(40000);
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                scatterChart.animateX(progress);
+
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+
+        });
     }
 
-      @Override
+    @Override
     public void onClick(View v) {
 
         if (btn1.getText().equals("Channel1")) {
@@ -63,20 +87,18 @@ public class Scatterchart extends AppCompatActivity implements View.OnClickListe
             }
             dataset = new ScatterDataSet(entries, "channel1");
             data = new ScatterData(labels, dataset);
-            dataset.setColors(new int[]{ColorTemplate.getHoloBlue()}); //
+           // dataset.setColors(new int[]{ColorTemplate.getHoloBlue()}); //
             dataset.setScatterShapeSize(10);
             dataset.setScatterShape(ScatterChart.ScatterShape.CIRCLE);
             scatterChart.setData(data);
-            scatterChart.animateX(30000);
-            btn1.setText("Off");
+
+            btn1.setText("Off1");
 
         } else {
             scatterChart.clearValues();
             btn1.setText("Channel1");
-
         }
-
-
     }
+
 }
 
