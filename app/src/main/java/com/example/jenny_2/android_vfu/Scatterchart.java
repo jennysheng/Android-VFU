@@ -84,61 +84,61 @@ public class Scatterchart extends AppCompatActivity implements View.OnClickListe
             list8 = bundle.getStringArrayList("channel8data");
         }
         entries = new ArrayList<>();
-        labels = new ArrayList<String>();
+        labels = new ArrayList<>();
         for (int i = 0; i < list1.size(); i++) {
             entries.add(new Entry(Float.parseFloat(list1.get(i)), i));
             labels.add("" + i);
         }
         entries2 = new ArrayList<>();
-        labels2 = new ArrayList<String>();
+        labels2 = new ArrayList<>();
         for (int i = 0; i < list2.size(); i++) {
             entries2.add(new Entry(Float.parseFloat(list2.get(i)), i));
             labels2.add("" + i);
         }
         entries3 = new ArrayList<>();
-        labels3 = new ArrayList<String>();
+        labels3 = new ArrayList<>();
         for (int i = 0; i < list3.size(); i++) {
             entries3.add(new Entry(Float.parseFloat(list3.get(i)), i));
             labels3.add("" + i);
         }
         entries4 = new ArrayList<>();
-        labels4 = new ArrayList<String>();
+        labels4 = new ArrayList<>();
         for (int i = 0; i < list4.size(); i++) {
             entries4.add(new Entry(Float.parseFloat(list4.get(i)), i));
             labels4.add("" + i);
         }
         entries5 = new ArrayList<>();
-        labels5 = new ArrayList<String>();
+        labels5 = new ArrayList<>();
         for (int i = 0; i < list5.size(); i++) {
             entries5.add(new Entry(Float.parseFloat(list5.get(i)), i));
             labels5.add("" + i);
         }
         entries6 = new ArrayList<>();
-        labels6 = new ArrayList<String>();
+        labels6 = new ArrayList<>();
         for (int i = 0; i < list6.size(); i++) {
             entries6.add(new Entry(Float.parseFloat(list6.get(i)), i));
             labels6.add("" + i);
         }
         entries6 = new ArrayList<>();
-        labels6 = new ArrayList<String>();
+        labels6 = new ArrayList<>();
         for (int i = 0; i < list6.size(); i++) {
             entries6.add(new Entry(Float.parseFloat(list6.get(i)), i));
             labels6.add("" + i);
         }
         entries7 = new ArrayList<>();
-        labels7 = new ArrayList<String>();
+        labels7 = new ArrayList<>();
         for (int i = 0; i < list7.size(); i++) {
             entries7.add(new Entry(Float.parseFloat(list7.get(i)), i));
             labels7.add("" + i);
         }
         entries8 = new ArrayList<>();
-        labels8 = new ArrayList<String>();
+        labels8 = new ArrayList<>();
         for (int i = 0; i < list7.size(); i++) {
             entries8.add(new Entry(Float.parseFloat(list8.get(i)), i));
             labels8.add("" + i);
         }
         entriesSingle = new ArrayList<>();
-        labels10 = new ArrayList<String>();
+        labels10 = new ArrayList<>();
 
         for (int i = 0; i < list7.size(); i++) {
 
@@ -189,7 +189,7 @@ public class Scatterchart extends AppCompatActivity implements View.OnClickListe
                     btn1.setText("Off1");
 
                 } else {
-                    dataset.setVisible(false);
+                    dataset.clear();
                     btn1.setText("Channel1");
                 }
                 break;
@@ -206,7 +206,7 @@ public class Scatterchart extends AppCompatActivity implements View.OnClickListe
 
 
                 } else {
-                    dataset2.setVisible(false);
+                    dataset2.clear();
                     btn2.setText("Channel2");
                 }
                 break;
@@ -222,7 +222,7 @@ public class Scatterchart extends AppCompatActivity implements View.OnClickListe
                     btn3.setText("Off3");
 
                 } else {
-                    dataset3.setVisible(false);
+                    dataset3.clear();
                     btn3.setText("Channel3");
                 }
                 break;
@@ -237,7 +237,7 @@ public class Scatterchart extends AppCompatActivity implements View.OnClickListe
                     btn4.setText("Off4");
 
                 } else {
-                    dataset4.setVisible(false);
+                    dataset4.clear();
                     btn4.setText("Channel4");
                 }
                 break;
@@ -253,7 +253,7 @@ public class Scatterchart extends AppCompatActivity implements View.OnClickListe
                     btn5.setText("Off5");
 
                 } else {
-                    dataset5.setVisible(false);
+                    dataset5.clear();
                     btn5.setText("Channel5");
                 }
                 break;
@@ -269,7 +269,7 @@ public class Scatterchart extends AppCompatActivity implements View.OnClickListe
                     btn6.setText("Off6");
 
                 } else {
-                    dataset6.setVisible(false);
+                    dataset6.clear();
                     btn6.setText("Channel6");
                 }
                 break;
@@ -285,7 +285,7 @@ public class Scatterchart extends AppCompatActivity implements View.OnClickListe
                     btn7.setText("Off7");
 
                 } else {
-                    dataset7.setVisible(false);
+                    dataset7.clear();
                     btn7.setText("Channel7");
                 }
                 break;
@@ -301,7 +301,8 @@ public class Scatterchart extends AppCompatActivity implements View.OnClickListe
                     btn8.setText("Off8");
 
                 } else {
-                    dataset8.setVisible(false);
+
+                    dataset8.clear();
                     btn8.setText("Channel8");
                 }
                 break;
@@ -318,10 +319,12 @@ public class Scatterchart extends AppCompatActivity implements View.OnClickListe
                     btn10.setText("offSingle");
                     scatterChart.resetViewPortOffsets();
                 } else {
-                    dataset10.setVisible(false);
+                    dataset10.clear();
                     btn10.setText("Single");
                 }
                 break;
+            case R.id.button:
+                scatterChart.clear();
 
             default:
                 break;

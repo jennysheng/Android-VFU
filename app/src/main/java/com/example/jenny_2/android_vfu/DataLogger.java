@@ -39,9 +39,7 @@ public class DataLogger {
         return value4;
     }
 
-    public String getValue5() {
-        return value5;
-    }
+    public String getValue5() { return value5; }
 
     public String getValue6() {
         return value6;
