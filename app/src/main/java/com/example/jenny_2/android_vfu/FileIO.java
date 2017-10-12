@@ -40,7 +40,7 @@ public class FileIO extends AppCompatActivity {
 
         button2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                // to retrieve a file from another app
+                // to retrieve a file from SD card
                 Intent textFileIntent = new Intent(Intent.ACTION_GET_CONTENT);
                 textFileIntent.setType("text/*");
                 startActivityForResult(textFileIntent, REQUESTCODE_PICK_TEXTFILE);
@@ -120,18 +120,20 @@ public class FileIO extends AppCompatActivity {
     private void createchart() {
 
 // add jackoption to build.gradle to enable this method
-        getChannelsdata().stream().forEach((c) -> {
-            channel1list.add(c.getValue1());
-            channel2list.add(c.getValue2());
-            channel3list.add(c.getValue3());
-            channel4list.add(c.getValue4());
-            channel5list.add(c.getValue5());
-            channel6list.add(c.getValue6());
-            channel7list.add(c.getValue7());
-            channel8list.add(c.getValue8());
+       while( getChannelsdata().iterator().hasNext()){
 
+            channel1list.add(getChannelsdata().iterator().next().value1);
+            channel2list.add(getChannelsdata().iterator().next().value2);
+            channel3list.add(getChannelsdata().iterator().next().value3);
+            channel4list.add(getChannelsdata().iterator().next().value4);
+            channel5list.add(getChannelsdata().iterator().next().value5);
+            channel6list.add(getChannelsdata().iterator().next().value6);
+            channel7list.add(getChannelsdata().iterator().next().value7);
+            channel8list.add(getChannelsdata().iterator().next().value8);
+           getChannelsdata().remove(0);
 
-        });
+        }
+
     }
 
 }
