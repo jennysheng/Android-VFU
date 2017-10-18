@@ -180,27 +180,27 @@ public class Scatterchart extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.button1:
-                if (btn1.getText().equals("Channel1")) {
+                if (btn1.getText().equals("Ch1")) {
                     dataset = new ScatterDataSet(entries, "channel1");
                     data = new ScatterData(labels, dataset);
                     dataset.setColors(new int[]{colors[0]}); //
-                    dataset.setScatterShapeSize(10);
+                    dataset.setScatterShapeSize(3);
                     dataset.setScatterShape(ScatterChart.ScatterShape.CIRCLE);
                     scatterChart.setData(data);
                     btn1.setText("Off1");
 
                 } else {
                     data.removeDataSet(0);
-                    btn1.setText("Channel1");
+                    btn1.setText("Ch1");
                 }
                 break;
 
             case R.id.button2:
-                if (btn2.getText().equals("Channel2")) {
+                if (btn2.getText().equals("Ch2")) {
                     dataset2 = new ScatterDataSet(entries2, "channel2");
                     data2 = new ScatterData(labels2, dataset2);
                     dataset2.setColors(new int[]{colors[1]}); //
-                    dataset2.setScatterShapeSize(10);
+                    dataset2.setScatterShapeSize(5);
                     dataset2.setScatterShape(ScatterChart.ScatterShape.CROSS);
                     scatterChart.setData(data2);
                     btn2.setText("Off2");
@@ -208,95 +208,95 @@ public class Scatterchart extends AppCompatActivity implements View.OnClickListe
 
                 } else {
                     data2.removeDataSet(0);
-                    btn2.setText("Channel2");
+                    btn2.setText("Ch2");
                 }
                 break;
 
             case R.id.button3:
-                if (btn3.getText().equals("Channel3")) {
+                if (btn3.getText().equals("Ch3")) {
                     dataset3 = new ScatterDataSet(entries3, "channel3");
                     data3 = new ScatterData(labels3, dataset3);
                     dataset3.setColors(new int[]{colors[2]}); //
-                    dataset3.setScatterShapeSize(10);
+                    dataset3.setScatterShapeSize(5);
                     dataset3.setScatterShape(ScatterChart.ScatterShape.SQUARE);
                     scatterChart.setData(data3);
                     btn3.setText("Off3");
 
                 } else {
                     data3.removeDataSet(0);
-                    btn3.setText("Channel3");
+                    btn3.setText("Ch3");
                 }
                 break;
             case R.id.button4:
-                if (btn4.getText().equals("Channel4")) {
+                if (btn4.getText().equals("Ch4")) {
                     dataset4 = new ScatterDataSet(entries4, "channel4");
                     data4 = new ScatterData(labels4, dataset4);
                     dataset4.setColors(new int[]{colors[3]}); //
-                    dataset4.setScatterShapeSize(10);
+                    dataset4.setScatterShapeSize(5);
                     dataset4.setScatterShape(ScatterChart.ScatterShape.TRIANGLE);
                     scatterChart.setData(data4);
                     btn4.setText("Off4");
 
                 } else {
                     data4.removeDataSet(0);
-                    btn4.setText("Channel4");
+                    btn4.setText("Ch4");
                 }
                 break;
 
             case R.id.button5:
-                if (btn5.getText().equals("Channel5")) {
+                if (btn5.getText().equals("Ch5")) {
                     dataset5 = new ScatterDataSet(entries5, "channel5");
                     data5 = new ScatterData(labels5, dataset5);
                     dataset5.setColors(new int[]{colors[4]}); //
-                    dataset5.setScatterShapeSize(10);
+                    dataset5.setScatterShapeSize(5);
                     dataset5.setScatterShape(ScatterChart.ScatterShape.SQUARE);
                     scatterChart.setData(data5);
                     btn5.setText("Off5");
 
                 } else {
                     data5.removeDataSet(0);
-                    btn5.setText("Channel5");
+                    btn5.setText("Ch5");
                 }
                 break;
             case R.id.button6:
 
-                if (btn6.getText().equals("Channel6")) {
+                if (btn6.getText().equals("Ch6")) {
                     dataset6 = new ScatterDataSet(entries6, "channel6");
                     data6 = new ScatterData(labels6, dataset6);
                     dataset6.setColors(new int[]{colors[5]}); //
-                    dataset6.setScatterShapeSize(10);
+                    dataset6.setScatterShapeSize(5);
                     dataset6.setScatterShape(ScatterChart.ScatterShape.CIRCLE);
                     scatterChart.setData(data6);
                     btn6.setText("Off6");
 
                 } else {
                     data6.removeDataSet(0);
-                    btn6.setText("Channel6");
+                    btn6.setText("Ch6");
                 }
                 break;
 
             case R.id.button7:
-                if (btn7.getText().equals("Channel7")) {
+                if (btn7.getText().equals("Ch7")) {
                     dataset7 = new ScatterDataSet(entries7, "channel7");
                     data7 = new ScatterData(labels7, dataset7);
                     dataset7.setColors(new int[]{colors[6]}); //
-                    dataset7.setScatterShapeSize(10);
+                    dataset7.setScatterShapeSize(5);
                     dataset7.setScatterShape(ScatterChart.ScatterShape.TRIANGLE);
                     scatterChart.setData(data7);
                     btn7.setText("Off7");
 
                 } else {
                     data7.removeDataSet(0);
-                    btn7.setText("Channel7");
+                    btn7.setText("Ch7");
                 }
                 break;
 
             case R.id.button8:
-                if (btn8.getText().equals("Channel8")) {
+                if (btn8.getText().equals("Ch8")) {
                     dataset8 = new ScatterDataSet(entries8, "channel8");
                     data8 = new ScatterData(labels8, dataset8);
                     dataset8.setColors(new int[]{colors[7]}); //
-                    dataset8.setScatterShapeSize(10);
+                    dataset8.setScatterShapeSize(5);
                     dataset8.setScatterShape(ScatterChart.ScatterShape.CROSS);
                     scatterChart.setData(data8);
                     btn8.setText("Off8");
@@ -304,7 +304,7 @@ public class Scatterchart extends AppCompatActivity implements View.OnClickListe
                 } else {
 
                     data8.removeDataSet(0);
-                    btn8.setText("Channel8");
+                    btn8.setText("Ch8");
                 }
                 break;
 
@@ -314,7 +314,7 @@ public class Scatterchart extends AppCompatActivity implements View.OnClickListe
                     dataset10 = new ScatterDataSet(entriesSingle, "all");
                     data10 = new ScatterData(labels10, dataset10);
                     dataset10.setColors(ColorTemplate.JOYFUL_COLORS); //
-                    dataset10.setScatterShapeSize(10);
+                    dataset10.setScatterShapeSize(5);
                     dataset10.setScatterShape(ScatterChart.ScatterShape.CROSS);
                     scatterChart.setData(data10);
                     btn10.setText("offSingle");

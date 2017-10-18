@@ -8,21 +8,21 @@
 
     <Button
         android:id="@+id/Read_externalButton"
-        android:layout_width="203dp"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:text="@string/read_external"
+        android:text="@string/read_ext"
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="16dp" />
 
 
     <Button
         android:id="@+id/buttonShow"
-        android:layout_width="147dp"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/Read_externalButton"
         android:text="Show_Graph"
         tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="24dp" />
+        tools:layout_editor_absoluteY="16dp" />
 
 
 </LinearLayout>
