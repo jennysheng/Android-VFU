@@ -29,6 +29,7 @@ public class FileIO extends AppCompatActivity {
     private ArrayList<String> channel6list = new ArrayList<>();
     private ArrayList<String> channel7list = new ArrayList<>();
     private ArrayList<String> channel8list = new ArrayList<>();
+    private ArrayList<String> allchannelslist = new ArrayList<>();
 
 
 
@@ -37,16 +38,12 @@ public class FileIO extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_file_io);
         final Button button2 = (Button) findViewById(R.id.Read_externalButton);
-
         button2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // to retrieve a file from SD card
                 Intent textFileIntent = new Intent(Intent.ACTION_GET_CONTENT);
                 textFileIntent.setType("text/*");
                 startActivityForResult(textFileIntent, REQUESTCODE_PICK_TEXTFILE);
-
-
-
             }
         });
         final Button button3 = (Button) findViewById(R.id.buttonShow);
@@ -61,9 +58,14 @@ public class FileIO extends AppCompatActivity {
                 intent.putStringArrayListExtra("channel6data", channel6list);
                 intent.putStringArrayListExtra("channel7data", channel7list);
                 intent.putStringArrayListExtra("channel8data", channel8list);
+                intent.putStringArrayListExtra("allchannelsdata", allchannelslist);
                 startActivity(intent);
             }
         });
+        if (getIntent().getBooleanExtra("EXIT", false))
+        {
+            finish();
+        }
 
     }
 
@@ -99,7 +101,7 @@ public class FileIO extends AppCompatActivity {
         String content = filecontent.toString();
         String[] parts = content.split("\t");
 
-        System.out.println(j);
+        Log.i("linenbr",String.valueOf(j));
         int i = 0;
 
         while (i < ((j - 1) * 9)) {
@@ -119,20 +121,30 @@ public class FileIO extends AppCompatActivity {
 
     private void createchart() {
 
-// add jackoption to build.gradle to enable this method
-       while( getChannelsdata().iterator().hasNext()){
 
+       while( getChannelsdata().iterator().hasNext()){
             channel1list.add(getChannelsdata().iterator().next().value1);
+           allchannelslist.add(getChannelsdata().iterator().next().value1);
             channel2list.add(getChannelsdata().iterator().next().value2);
+           allchannelslist.add(getChannelsdata().iterator().next().value2);
             channel3list.add(getChannelsdata().iterator().next().value3);
+           allchannelslist.add(getChannelsdata().iterator().next().value3);
             channel4list.add(getChannelsdata().iterator().next().value4);
+           allchannelslist.add(getChannelsdata().iterator().next().value4);
             channel5list.add(getChannelsdata().iterator().next().value5);
+           allchannelslist.add(getChannelsdata().iterator().next().value5);
             channel6list.add(getChannelsdata().iterator().next().value6);
+           allchannelslist.add(getChannelsdata().iterator().next().value6);
             channel7list.add(getChannelsdata().iterator().next().value7);
+           allchannelslist.add(getChannelsdata().iterator().next().value7);
             channel8list.add(getChannelsdata().iterator().next().value8);
-           getChannelsdata().remove(0);
+           allchannelslist.add(getChannelsdata().iterator().next().value8);
+
+            getChannelsdata().remove(0);
 
         }
+
+
 
     }
 
