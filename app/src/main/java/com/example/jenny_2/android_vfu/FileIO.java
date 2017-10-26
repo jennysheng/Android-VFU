@@ -20,7 +20,7 @@ public class FileIO extends AppCompatActivity {
 
 
     private static final int REQUESTCODE_PICK_TEXTFILE = 1;
-    ArrayList<DataLogger> channelsdata = new ArrayList<>();
+    private ArrayList<String> datetimelist = new ArrayList<>();
     private ArrayList<String> channel1list = new ArrayList<>();
     private ArrayList<String> channel2list = new ArrayList<>();
     private ArrayList<String> channel3list = new ArrayList<>();
@@ -29,7 +29,7 @@ public class FileIO extends AppCompatActivity {
     private ArrayList<String> channel6list = new ArrayList<>();
     private ArrayList<String> channel7list = new ArrayList<>();
     private ArrayList<String> channel8list = new ArrayList<>();
-    private ArrayList<String> allchannelslist = new ArrayList<>();
+
 
 
 
@@ -58,14 +58,10 @@ public class FileIO extends AppCompatActivity {
                 intent.putStringArrayListExtra("channel6data", channel6list);
                 intent.putStringArrayListExtra("channel7data", channel7list);
                 intent.putStringArrayListExtra("channel8data", channel8list);
-                intent.putStringArrayListExtra("allchannelsdata", allchannelslist);
                 startActivity(intent);
             }
         });
-        if (getIntent().getBooleanExtra("EXIT", false))
-        {
-            finish();
-        }
+
 
     }
 
@@ -78,14 +74,14 @@ public class FileIO extends AppCompatActivity {
             Log.d("", "Text URI= " + uri);
             try {
                 readTextFromUri(uri);
-                createchart();
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
     }
 
-    private ArrayList<DataLogger> readTextFromUri(Uri uri) throws IOException {
+    private void readTextFromUri(Uri uri) throws IOException {
 
         InputStream inputStream = getContentResolver().openInputStream(uri);
         assert inputStream != null;
@@ -95,7 +91,7 @@ public class FileIO extends AppCompatActivity {
         int j = 0;
         while ((line) != null) {
             line = reader.readLine();
-            filecontent.append(line + "\t").trimToSize();
+            filecontent.append(line).append("\t").trimToSize();
             j++;
         }
         String content = filecontent.toString();
@@ -105,47 +101,24 @@ public class FileIO extends AppCompatActivity {
         int i = 0;
 
         while (i < ((j - 1) * 9)) {
-
-            channelsdata.add(new DataLogger(parts[i], parts[i + 1], parts[i + 2], parts[i + 3], parts[i + 4], parts[i + 5], parts[i + 6], parts[i + 7], parts[i + 8]));
-
+            datetimelist.add(parts[i]);
+            channel1list.add(parts[i+1]);
+            channel2list.add( parts[i +2]);
+            channel3list.add(parts[i+3]);
+            channel4list.add( parts[i +4]);
+            channel5list.add(parts[i+5]);
+            channel6list.add( parts[i +6 ]);
+            channel7list.add(parts[i+7]);
+            channel8list.add( parts[i + 8]);
             i += 9;
         }
 
         inputStream.close();
-        return channelsdata;
-    }
-
-    public ArrayList<DataLogger> getChannelsdata() {
-        return channelsdata;
-    }
-
-    private void createchart() {
-
-
-       while( getChannelsdata().iterator().hasNext()){
-            channel1list.add(getChannelsdata().iterator().next().value1);
-           allchannelslist.add(getChannelsdata().iterator().next().value1);
-            channel2list.add(getChannelsdata().iterator().next().value2);
-           allchannelslist.add(getChannelsdata().iterator().next().value2);
-            channel3list.add(getChannelsdata().iterator().next().value3);
-           allchannelslist.add(getChannelsdata().iterator().next().value3);
-            channel4list.add(getChannelsdata().iterator().next().value4);
-           allchannelslist.add(getChannelsdata().iterator().next().value4);
-            channel5list.add(getChannelsdata().iterator().next().value5);
-           allchannelslist.add(getChannelsdata().iterator().next().value5);
-            channel6list.add(getChannelsdata().iterator().next().value6);
-           allchannelslist.add(getChannelsdata().iterator().next().value6);
-            channel7list.add(getChannelsdata().iterator().next().value7);
-           allchannelslist.add(getChannelsdata().iterator().next().value7);
-            channel8list.add(getChannelsdata().iterator().next().value8);
-           allchannelslist.add(getChannelsdata().iterator().next().value8);
-
-            getChannelsdata().remove(0);
-
-        }
-
-
 
     }
+
+
+
+
 
 }
