@@ -341,6 +341,11 @@ public class Scatterchart extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    protected void onStop() {
+        super.onStop();
+        System.exit(0);
+
+    }
 
 }
 
