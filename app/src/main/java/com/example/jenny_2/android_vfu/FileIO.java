@@ -82,7 +82,6 @@ public class FileIO extends AppCompatActivity {
     }
 
     private void readTextFromUri(Uri uri) throws IOException {
-
         InputStream inputStream = getContentResolver().openInputStream(uri);
         assert inputStream != null;
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
