@@ -20,7 +20,7 @@ public class FileIO extends AppCompatActivity {
 
 
     private static final int REQUESTCODE_PICK_TEXTFILE = 1;
-    ArrayList<DataLogger> channelsdata = new ArrayList<>();
+    private ArrayList<String> datetimelist = new ArrayList<>();
     private ArrayList<String> channel1list = new ArrayList<>();
     private ArrayList<String> channel2list = new ArrayList<>();
     private ArrayList<String> channel3list = new ArrayList<>();
@@ -32,21 +32,18 @@ public class FileIO extends AppCompatActivity {
 
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_file_io);
         final Button button2 = (Button) findViewById(R.id.Read_externalButton);
-
         button2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                // to retrieve a file from another app
+                // to retrieve a file from SD card
                 Intent textFileIntent = new Intent(Intent.ACTION_GET_CONTENT);
                 textFileIntent.setType("text/*");
                 startActivityForResult(textFileIntent, REQUESTCODE_PICK_TEXTFILE);
-
-
-
             }
         });
         final Button button3 = (Button) findViewById(R.id.buttonShow);
@@ -65,6 +62,7 @@ public class FileIO extends AppCompatActivity {
             }
         });
 
+
     }
 
     @Override
@@ -76,15 +74,14 @@ public class FileIO extends AppCompatActivity {
             Log.d("", "Text URI= " + uri);
             try {
                 readTextFromUri(uri);
-                createchart();
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
     }
 
-    private ArrayList<DataLogger> readTextFromUri(Uri uri) throws IOException {
-
+    private void readTextFromUri(Uri uri) throws IOException {
         InputStream inputStream = getContentResolver().openInputStream(uri);
         assert inputStream != null;
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
@@ -93,45 +90,34 @@ public class FileIO extends AppCompatActivity {
         int j = 0;
         while ((line) != null) {
             line = reader.readLine();
-            filecontent.append(line + "\t").trimToSize();
+            filecontent.append(line).append("\t").trimToSize();
             j++;
         }
         String content = filecontent.toString();
         String[] parts = content.split("\t");
 
-        System.out.println(j);
+        Log.i("linenbr",String.valueOf(j));
         int i = 0;
 
         while (i < ((j - 1) * 9)) {
-
-            channelsdata.add(new DataLogger(parts[i], parts[i + 1], parts[i + 2], parts[i + 3], parts[i + 4], parts[i + 5], parts[i + 6], parts[i + 7], parts[i + 8]));
-
+            datetimelist.add(parts[i]);
+            channel1list.add(parts[i+1]);
+            channel2list.add( parts[i +2]);
+            channel3list.add(parts[i+3]);
+            channel4list.add( parts[i +4]);
+            channel5list.add(parts[i+5]);
+            channel6list.add( parts[i +6 ]);
+            channel7list.add(parts[i+7]);
+            channel8list.add( parts[i + 8]);
             i += 9;
         }
 
         inputStream.close();
-        return channelsdata;
+
     }
 
-    public ArrayList<DataLogger> getChannelsdata() {
-        return channelsdata;
-    }
-
-    private void createchart() {
-
-// add jackoption to build.gradle to enable this method
-        getChannelsdata().stream().forEach((c) -> {
-            channel1list.add(c.getValue1());
-            channel2list.add(c.getValue2());
-            channel3list.add(c.getValue3());
-            channel4list.add(c.getValue4());
-            channel5list.add(c.getValue5());
-            channel6list.add(c.getValue6());
-            channel7list.add(c.getValue7());
-            channel8list.add(c.getValue8());
 
 
-        });
-    }
+
 
 }
