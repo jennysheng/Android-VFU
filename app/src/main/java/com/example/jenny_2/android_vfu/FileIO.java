@@ -118,10 +118,7 @@ public class FileIO extends AppCompatActivity {
     }
 
     private void createchart() {
-
-// add jackoption to build.gradle to enable this method
        while( getChannelsdata().iterator().hasNext()){
-
             channel1list.add(getChannelsdata().iterator().next().value1);
             channel2list.add(getChannelsdata().iterator().next().value2);
             channel3list.add(getChannelsdata().iterator().next().value3);
@@ -130,7 +127,7 @@ public class FileIO extends AppCompatActivity {
             channel6list.add(getChannelsdata().iterator().next().value6);
             channel7list.add(getChannelsdata().iterator().next().value7);
             channel8list.add(getChannelsdata().iterator().next().value8);
-           getChannelsdata().remove(0);
+            getChannelsdata().remove(0);
 
         }
 

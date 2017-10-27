@@ -32,6 +32,7 @@ public class Scatterchart extends AppCompatActivity implements View.OnClickListe
     ScatterChart scatterChart;
     ArrayList<Entry> entries, entries2, entries3, entries4, entries5, entries6, entries7, entries8, entriesSingle;
     ArrayList<String> labels, labels2, labels3, labels4, labels5, labels6, labels7, labels8, labels10;
+    ArrayList<String> emptylabels= new ArrayList<String>();
     ScatterDataSet dataset, dataset2, dataset3, dataset4, dataset5, dataset6, dataset7, dataset8, dataset10;
     ScatterData data, data2, data3, data4, data5, data6, data7, data8, data10;
     SeekBar seekBar;
@@ -183,7 +184,7 @@ public class Scatterchart extends AppCompatActivity implements View.OnClickListe
                 if (btn1.getText().equals("Ch1")) {
                     dataset = new ScatterDataSet(entries, "Channel1");
                     data = new ScatterData(labels, dataset);
-                    dataset.setColors(new int[]{colors[0]}); //
+                    dataset.setColors(new int[]{colors[0]});
                     dataset.setScatterShapeSize(3);
                     dataset.setScatterShape(ScatterChart.ScatterShape.CIRCLE);
                     scatterChart.setData(data);
@@ -199,7 +200,7 @@ public class Scatterchart extends AppCompatActivity implements View.OnClickListe
                 if (btn2.getText().equals("Ch2")) {
                     dataset2 = new ScatterDataSet(entries2, "Channel2");
                     data2 = new ScatterData(labels2, dataset2);
-                    dataset2.setColors(new int[]{colors[1]}); //
+                    dataset2.setColors(new int[]{colors[1]});
                     dataset2.setScatterShapeSize(5);
                     dataset2.setScatterShape(ScatterChart.ScatterShape.CROSS);
                     scatterChart.setData(data2);
@@ -216,7 +217,7 @@ public class Scatterchart extends AppCompatActivity implements View.OnClickListe
                 if (btn3.getText().equals("Ch3")) {
                     dataset3 = new ScatterDataSet(entries3, "Channel3");
                     data3 = new ScatterData(labels3, dataset3);
-                    dataset3.setColors(new int[]{colors[2]}); //
+                    dataset3.setColors(new int[]{colors[2]});
                     dataset3.setScatterShapeSize(5);
                     dataset3.setScatterShape(ScatterChart.ScatterShape.SQUARE);
                     scatterChart.setData(data3);
@@ -231,7 +232,7 @@ public class Scatterchart extends AppCompatActivity implements View.OnClickListe
                 if (btn4.getText().equals("Ch4")) {
                     dataset4 = new ScatterDataSet(entries4, "Channel4");
                     data4 = new ScatterData(labels4, dataset4);
-                    dataset4.setColors(new int[]{colors[3]}); //
+                    dataset4.setColors(new int[]{colors[3]});
                     dataset4.setScatterShapeSize(5);
                     dataset4.setScatterShape(ScatterChart.ScatterShape.TRIANGLE);
                     scatterChart.setData(data4);
@@ -247,7 +248,7 @@ public class Scatterchart extends AppCompatActivity implements View.OnClickListe
                 if (btn5.getText().equals("Ch5")) {
                     dataset5 = new ScatterDataSet(entries5, "Channel5");
                     data5 = new ScatterData(labels5, dataset5);
-                    dataset5.setColors(new int[]{colors[4]}); //
+                    dataset5.setColors(new int[]{colors[4]});
                     dataset5.setScatterShapeSize(5);
                     dataset5.setScatterShape(ScatterChart.ScatterShape.SQUARE);
                     scatterChart.setData(data5);
@@ -263,7 +264,7 @@ public class Scatterchart extends AppCompatActivity implements View.OnClickListe
                 if (btn6.getText().equals("Ch6")) {
                     dataset6 = new ScatterDataSet(entries6, "Channel6");
                     data6 = new ScatterData(labels6, dataset6);
-                    dataset6.setColors(new int[]{colors[5]}); //
+                    dataset6.setColors(new int[]{colors[5]});
                     dataset6.setScatterShapeSize(5);
                     dataset6.setScatterShape(ScatterChart.ScatterShape.CIRCLE);
                     scatterChart.setData(data6);
@@ -279,7 +280,7 @@ public class Scatterchart extends AppCompatActivity implements View.OnClickListe
                 if (btn7.getText().equals("Ch7")) {
                     dataset7 = new ScatterDataSet(entries7, "Channel7");
                     data7 = new ScatterData(labels7, dataset7);
-                    dataset7.setColors(new int[]{colors[6]}); //
+                    dataset7.setColors(new int[]{colors[6]});
                     dataset7.setScatterShapeSize(5);
                     dataset7.setScatterShape(ScatterChart.ScatterShape.TRIANGLE);
                     scatterChart.setData(data7);
@@ -295,14 +296,13 @@ public class Scatterchart extends AppCompatActivity implements View.OnClickListe
                 if (btn8.getText().equals("Ch8")) {
                     dataset8 = new ScatterDataSet(entries8, "Channel8");
                     data8 = new ScatterData(labels8, dataset8);
-                    dataset8.setColors(new int[]{colors[7]}); //
+                    dataset8.setColors(new int[]{colors[7]});
                     dataset8.setScatterShapeSize(5);
                     dataset8.setScatterShape(ScatterChart.ScatterShape.CROSS);
                     scatterChart.setData(data8);
                     btn8.setText("Off8");
 
                 } else {
-
                     data8.removeDataSet(0);
                     btn8.setText("Ch8");
                 }
@@ -313,7 +313,7 @@ public class Scatterchart extends AppCompatActivity implements View.OnClickListe
                 if (btn10.getText().equals("Single")) {
                     dataset10 = new ScatterDataSet(entriesSingle, "All");
                     data10 = new ScatterData(labels10, dataset10);
-                    dataset10.setColors(ColorTemplate.JOYFUL_COLORS); //
+                    dataset10.setColors(ColorTemplate.JOYFUL_COLORS);
                     dataset10.setScatterShapeSize(5);
                     dataset10.setScatterShape(ScatterChart.ScatterShape.CROSS);
                     scatterChart.setData(data10);
@@ -325,7 +325,7 @@ public class Scatterchart extends AppCompatActivity implements View.OnClickListe
                 }
                 break;
             case R.id.button:
-               list1.clear();
+                list1.clear();
                 list2.clear();
                 list3.clear();
                 list4.clear();
@@ -333,7 +333,18 @@ public class Scatterchart extends AppCompatActivity implements View.OnClickListe
                 list6.clear();
                 list7.clear();
                 list8.clear();
-                scatterChart.getScatterData().clearValues();
+                dataset.clear();
+                dataset2.clear();
+                dataset3.clear();
+                dataset4.clear();
+                dataset5.clear();
+                dataset6.clear();
+                dataset7.clear();
+                dataset8.clear();
+                dataset10.clear();
+
+                scatterChart.clearValues();
+
 
 
             default:
