@@ -6,8 +6,10 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
+import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.SeekBar;
 
 
@@ -36,6 +38,7 @@ public class Scatterchart extends AppCompatActivity implements View.OnClickListe
     ScatterDataSet dataset, dataset2, dataset3, dataset4, dataset5, dataset6, dataset7, dataset8, dataset10;
     ScatterData data, data2, data3, data4, data5, data6, data7, data8, data10;
     SeekBar seekBar;
+    EditText editText;
     int[] colors = new int[]{
             Color.rgb(255, 0, 0),//red
             Color.rgb(255, 153, 0),//orange
@@ -71,6 +74,8 @@ public class Scatterchart extends AppCompatActivity implements View.OnClickListe
         btn8.setOnClickListener(this);
         btn10 = (Button) findViewById(R.id.button10);
         btn10.setOnClickListener(this);
+        editText=(EditText)findViewById(R.id.editText);
+        editText.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         if (bundle != null) {
@@ -188,10 +193,16 @@ public class Scatterchart extends AppCompatActivity implements View.OnClickListe
                     dataset.setScatterShapeSize(3);
                     dataset.setScatterShape(ScatterChart.ScatterShape.CIRCLE);
                     scatterChart.setData(data);
+                    if(editText.getText()!=null){
+                    scatterChart.animateX(Integer.parseInt(String.valueOf(editText.getText())));
+                    }
                     btn1.setText("Off1");
 
                 } else {
-                    data.removeDataSet(0);
+                    data.clearValues();
+                    scatterChart.clearAnimation();
+                    scatterChart.clearValues();
+                    scatterChart.clear();
                     btn1.setText("Ch1");
                 }
                 break;
@@ -204,11 +215,18 @@ public class Scatterchart extends AppCompatActivity implements View.OnClickListe
                     dataset2.setScatterShapeSize(5);
                     dataset2.setScatterShape(ScatterChart.ScatterShape.CROSS);
                     scatterChart.setData(data2);
+                    if(editText.getText()!=null){
+                        scatterChart.animateX(Integer.parseInt(String.valueOf(editText.getText())));
+                    }
                     btn2.setText("Off2");
 
 
                 } else {
-                    data2.removeDataSet(0);
+
+                    data2.clearValues();
+                    scatterChart.clearAnimation();
+                    scatterChart.clearValues();
+                    scatterChart.clear();
                     btn2.setText("Ch2");
                 }
                 break;
@@ -221,10 +239,16 @@ public class Scatterchart extends AppCompatActivity implements View.OnClickListe
                     dataset3.setScatterShapeSize(5);
                     dataset3.setScatterShape(ScatterChart.ScatterShape.SQUARE);
                     scatterChart.setData(data3);
+                    if(editText.getText()!=null){
+                        scatterChart.animateX(Integer.parseInt(String.valueOf(editText.getText())));
+                    }
                     btn3.setText("Off3");
 
                 } else {
-                    data3.removeDataSet(0);
+                    data3.clearValues();
+                    scatterChart.clearAnimation();
+                    scatterChart.clearValues();
+                    scatterChart.clear();
                     btn3.setText("Ch3");
                 }
                 break;
@@ -236,10 +260,16 @@ public class Scatterchart extends AppCompatActivity implements View.OnClickListe
                     dataset4.setScatterShapeSize(5);
                     dataset4.setScatterShape(ScatterChart.ScatterShape.TRIANGLE);
                     scatterChart.setData(data4);
+                    if(editText.getText()!=null){
+                        scatterChart.animateX(Integer.parseInt(String.valueOf(editText.getText())));
+                    }
                     btn4.setText("Off4");
 
                 } else {
-                    data4.removeDataSet(0);
+                    data4.clearValues();
+                    scatterChart.clearAnimation();
+                    scatterChart.clearValues();
+                    scatterChart.clear();
                     btn4.setText("Ch4");
                 }
                 break;
@@ -252,10 +282,16 @@ public class Scatterchart extends AppCompatActivity implements View.OnClickListe
                     dataset5.setScatterShapeSize(5);
                     dataset5.setScatterShape(ScatterChart.ScatterShape.SQUARE);
                     scatterChart.setData(data5);
+                    if(editText.getText()!=null){
+                        scatterChart.animateX(Integer.parseInt(String.valueOf(editText.getText())));
+                    }
                     btn5.setText("Off5");
 
                 } else {
-                    data5.removeDataSet(0);
+                    data5.clearValues();
+                    scatterChart.clearAnimation();
+                    scatterChart.clearValues();
+                    scatterChart.clear();
                     btn5.setText("Ch5");
                 }
                 break;
@@ -268,10 +304,16 @@ public class Scatterchart extends AppCompatActivity implements View.OnClickListe
                     dataset6.setScatterShapeSize(5);
                     dataset6.setScatterShape(ScatterChart.ScatterShape.CIRCLE);
                     scatterChart.setData(data6);
+                    if(editText.getText()!=null){
+                        scatterChart.animateX(Integer.parseInt(String.valueOf(editText.getText())));
+                    }
                     btn6.setText("Off6");
 
                 } else {
-                    data6.removeDataSet(0);
+                    data6.clearValues();
+                    scatterChart.clearAnimation();
+                    scatterChart.clearValues();
+                    scatterChart.clear();
                     btn6.setText("Ch6");
                 }
                 break;
@@ -284,10 +326,16 @@ public class Scatterchart extends AppCompatActivity implements View.OnClickListe
                     dataset7.setScatterShapeSize(5);
                     dataset7.setScatterShape(ScatterChart.ScatterShape.TRIANGLE);
                     scatterChart.setData(data7);
+                    if(editText.getText()!=null){
+                        scatterChart.animateX(Integer.parseInt(String.valueOf(editText.getText())));
+                    }
                     btn7.setText("Off7");
 
                 } else {
-                    data7.removeDataSet(0);
+                    data7.clearValues();
+                    scatterChart.clearAnimation();
+                    scatterChart.clearValues();
+                    scatterChart.clear();
                     btn7.setText("Ch7");
                 }
                 break;
@@ -300,10 +348,16 @@ public class Scatterchart extends AppCompatActivity implements View.OnClickListe
                     dataset8.setScatterShapeSize(5);
                     dataset8.setScatterShape(ScatterChart.ScatterShape.CROSS);
                     scatterChart.setData(data8);
+                    if(editText.getText()!=null){
+                        scatterChart.animateX(Integer.parseInt(String.valueOf(editText.getText())));
+                    }
                     btn8.setText("Off8");
 
                 } else {
-                    data8.removeDataSet(0);
+                    data8.clearValues();
+                    scatterChart.clearAnimation();
+                    scatterChart.clearValues();
+                    scatterChart.clear();
                     btn8.setText("Ch8");
                 }
                 break;
@@ -317,33 +371,20 @@ public class Scatterchart extends AppCompatActivity implements View.OnClickListe
                     dataset10.setScatterShapeSize(5);
                     dataset10.setScatterShape(ScatterChart.ScatterShape.CROSS);
                     scatterChart.setData(data10);
+                    if(editText.getText()!=null){
+                        scatterChart.animateX(Integer.parseInt(String.valueOf(editText.getText())));
+                    }
                     btn10.setText("All");
                     scatterChart.resetViewPortOffsets();
                 } else {
-                    data10.removeDataSet(0);
+                    data10.clearValues();
+                    scatterChart.clearAnimation();
+                    scatterChart.clearValues();
+                    scatterChart.clear();
                     btn10.setText("Single");
                 }
                 break;
-            case R.id.button:
-                list1.clear();
-                list2.clear();
-                list3.clear();
-                list4.clear();
-                list5.clear();
-                list6.clear();
-                list7.clear();
-                list8.clear();
-                dataset.clear();
-                dataset2.clear();
-                dataset3.clear();
-                dataset4.clear();
-                dataset5.clear();
-                dataset6.clear();
-                dataset7.clear();
-                dataset8.clear();
-                dataset10.clear();
 
-                scatterChart.clearValues();
 
 
 

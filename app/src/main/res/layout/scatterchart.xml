@@ -28,10 +28,10 @@
         android:id="@+id/seekBar"
         android:layout_width="100dp"
         android:layout_height="50dp"
-        android:layout_above="@+id/button3"
         android:layout_below="@+id/chart"
         android:layout_toRightOf="@+id/button5"
-        android:layout_toEndOf="@+id/button5" />
+        android:layout_toEndOf="@+id/button5"
+        android:layout_above="@+id/button6" />
 
     <Button
         android:id="@+id/button2"
@@ -122,11 +122,22 @@
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Clear"
+        android:text=""
         android:layout_alignBaseline="@+id/button7"
         android:layout_alignBottom="@+id/button7"
         android:layout_toRightOf="@+id/button7"
         android:layout_toEndOf="@+id/button7" />
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/button10"
+        android:layout_toRightOf="@+id/button7"
+        android:ems="10"
+        android:inputType="numberPassword"
+        android:layout_alignRight="@+id/button10"
+        android:layout_alignEnd="@+id/button10" />
 
 
 </RelativeLayout>
