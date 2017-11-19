@@ -1,16 +1,23 @@
 package com.example.jenny_2.android_vfu;
 
 
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.os.IBinder;
 import android.support.v7.app.AppCompatActivity;
 
 import android.text.InputType;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.SeekBar;
+import android.widget.Toast;
 
 
 import com.github.mikephil.charting.charts.ScatterChart;
@@ -21,23 +28,39 @@ import com.github.mikephil.charting.data.ScatterData;
 import com.github.mikephil.charting.data.ScatterDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
+import java.io.File;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 
 /**
  * Created by Jenny_2 on 2017-05-21.
  */
 
-public class Scatterchart extends AppCompatActivity implements View.OnClickListener {
-    ArrayList<String> list1, list2, list3, list4, list5, list6, list7, list8;
+public  class Scatterchart extends AppCompatActivity implements View.OnClickListener {
+    public ArrayList<Datalogger> channeldata;
+    public ArrayList<String> list1 = new ArrayList<>();
+    public ArrayList<String> list2 = new ArrayList<>();
+    public ArrayList<String> list3 = new ArrayList<>();
+    public ArrayList<String> list4 = new ArrayList<>();
+    public ArrayList<String> list5 = new ArrayList<>();
+    public ArrayList<String> list6 = new ArrayList<>();
+    public ArrayList<String> list7 = new ArrayList<>();
+    public ArrayList<String> list8 = new ArrayList<>();
+
     Button btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn10;
     ScatterChart scatterChart;
     ArrayList<Entry> entries, entries2, entries3, entries4, entries5, entries6, entries7, entries8, entriesSingle;
     ArrayList<String> labels, labels2, labels3, labels4, labels5, labels6, labels7, labels8, labels10;
-    ArrayList<String> emptylabels= new ArrayList<String>();
+
     ScatterDataSet dataset, dataset2, dataset3, dataset4, dataset5, dataset6, dataset7, dataset8, dataset10;
     ScatterData data, data2, data3, data4, data5, data6, data7, data8, data10;
-    SeekBar seekBar;
+    FileIOService mService ;
+    boolean mBound = false;
+
+
     EditText editText;
     int[] colors = new int[]{
             Color.rgb(255, 0, 0),//red
@@ -51,10 +74,26 @@ public class Scatterchart extends AppCompatActivity implements View.OnClickListe
 
     };
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    /** Defines callbacks for service binding, passed to bindService() */
+    private ServiceConnection mConnection = new ServiceConnection() {
+
+        @Override
+        public void onServiceConnected(ComponentName className, IBinder service) {
+            // We've bound to LocalService, cast the IBinder and get LocalService instance
+            FileIOService.LocalBinder binder = (FileIOService.LocalBinder) service;
+            mService = binder.getService();
+            mBound = true;
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName arg0) {
+            mBound = false;
+        }
+    };
+        protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.scatterchart);
+
         scatterChart = (ScatterChart) findViewById(R.id.chart);
         btn1 = (Button) findViewById(R.id.button1);
         btn1.setOnClickListener(this);
@@ -74,20 +113,59 @@ public class Scatterchart extends AppCompatActivity implements View.OnClickListe
         btn8.setOnClickListener(this);
         btn10 = (Button) findViewById(R.id.button10);
         btn10.setOnClickListener(this);
-        editText=(EditText)findViewById(R.id.editText);
+        editText = (EditText) findViewById(R.id.editText);
         editText.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
-        Intent intent = getIntent();
-        Bundle bundle = intent.getExtras();
-        if (bundle != null) {
-            list1 = bundle.getStringArrayList("channel1data");
-            list2 = bundle.getStringArrayList("channel2data");
-            list3 = bundle.getStringArrayList("channel3data");
-            list4 = bundle.getStringArrayList("channel4data");
-            list5 = bundle.getStringArrayList("channel5data");
-            list6 = bundle.getStringArrayList("channel6data");
-            list7 = bundle.getStringArrayList("channel7data");
-            list8 = bundle.getStringArrayList("channel8data");
-        }
+        editText.setText("1000");
+        Button writeButton = (Button) findViewById(R.id.button9);
+        writeButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
+                Date dateobj = new Date();
+                //File file = new File(Environment.getExternalStorageDirectory() + "/Documents/", "file:" + df.format(dateobj));
+                File file2 = new File(Environment.getExternalStorageDirectory() + "/Documents/", "jennydata.txt");
+                Uri uri = Uri.fromFile(file2);
+                file2.setWritable(true);
+                Log.i("writeUri:", file2.getPath());
+                WriteThread ws = new WriteThread(uri);
+                ws.start();
+
+
+            }
+        });
+        Button readButton = (Button) findViewById(R.id.button11);
+        readButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+
+                mService.read();
+                channeldata=mService.getChannelsdata();
+
+                    // Call a method from the LocalService.
+                    // However, if this call were something that might hang, then this request should
+                    // occur in a separate thread to avoid slowing down the activity performance.
+
+                    while (channeldata.iterator().hasNext()) {
+                        list1.add(channeldata.iterator().next().value1);
+                        Log.i("fuck",channeldata.iterator().next().value1);
+                        list2.add(channeldata.iterator().next().value2);
+                        list3.add(channeldata.iterator().next().value3);
+                        list4.add(channeldata.iterator().next().value4);
+                        list5.add(channeldata.iterator().next().value5);
+                        list6.add(channeldata.iterator().next().value6);
+                        list7.add(channeldata.iterator().next().value7);
+                        list8.add(channeldata.iterator().next().value8);
+                        channeldata.remove(0);
+
+
+                }
+
+
+
+            }
+        });
         entries = new ArrayList<>();
         labels = new ArrayList<>();
         for (int i = 0; i < list1.size(); i++) {
@@ -155,32 +233,15 @@ public class Scatterchart extends AppCompatActivity implements View.OnClickListe
             entriesSingle.add(new Entry(Float.parseFloat(list6.get(i)), i));
             entriesSingle.add(new Entry(Float.parseFloat(list7.get(i)), i));
             entriesSingle.add(new Entry(Float.parseFloat(list8.get(i)), i));
-            labels10.add(""+i);
+            labels10.add("" + i);
         }
         scatterChart.setNoDataText("Scroll seekbar->choose channel");
 
-        seekBar = (SeekBar) findViewById(R.id.seekBar);
-        seekBar.incrementProgressBy(10000);
-        seekBar.setMax(100000);
-
-        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                scatterChart.animateX(progress);
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-            }
-
-        });
 
 
     }
+
+
 
     @Override
     public void onClick(View v) {
@@ -193,8 +254,8 @@ public class Scatterchart extends AppCompatActivity implements View.OnClickListe
                     dataset.setScatterShapeSize(3);
                     dataset.setScatterShape(ScatterChart.ScatterShape.CIRCLE);
                     scatterChart.setData(data);
-                    if(editText.getText()!=null){
-                    scatterChart.animateX(Integer.parseInt(String.valueOf(editText.getText())));
+                    if (editText.getText() != null) {
+                        scatterChart.animateX(Integer.parseInt(String.valueOf(editText.getText())));
                     }
                     btn1.setText("Off1");
 
@@ -215,7 +276,7 @@ public class Scatterchart extends AppCompatActivity implements View.OnClickListe
                     dataset2.setScatterShapeSize(5);
                     dataset2.setScatterShape(ScatterChart.ScatterShape.CROSS);
                     scatterChart.setData(data2);
-                    if(editText.getText()!=null){
+                    if (editText.getText() != null) {
                         scatterChart.animateX(Integer.parseInt(String.valueOf(editText.getText())));
                     }
                     btn2.setText("Off2");
@@ -239,7 +300,7 @@ public class Scatterchart extends AppCompatActivity implements View.OnClickListe
                     dataset3.setScatterShapeSize(5);
                     dataset3.setScatterShape(ScatterChart.ScatterShape.SQUARE);
                     scatterChart.setData(data3);
-                    if(editText.getText()!=null){
+                    if (editText.getText() != null) {
                         scatterChart.animateX(Integer.parseInt(String.valueOf(editText.getText())));
                     }
                     btn3.setText("Off3");
@@ -260,7 +321,7 @@ public class Scatterchart extends AppCompatActivity implements View.OnClickListe
                     dataset4.setScatterShapeSize(5);
                     dataset4.setScatterShape(ScatterChart.ScatterShape.TRIANGLE);
                     scatterChart.setData(data4);
-                    if(editText.getText()!=null){
+                    if (editText.getText() != null) {
                         scatterChart.animateX(Integer.parseInt(String.valueOf(editText.getText())));
                     }
                     btn4.setText("Off4");
@@ -282,7 +343,7 @@ public class Scatterchart extends AppCompatActivity implements View.OnClickListe
                     dataset5.setScatterShapeSize(5);
                     dataset5.setScatterShape(ScatterChart.ScatterShape.SQUARE);
                     scatterChart.setData(data5);
-                    if(editText.getText()!=null){
+                    if (editText.getText() != null) {
                         scatterChart.animateX(Integer.parseInt(String.valueOf(editText.getText())));
                     }
                     btn5.setText("Off5");
@@ -304,7 +365,7 @@ public class Scatterchart extends AppCompatActivity implements View.OnClickListe
                     dataset6.setScatterShapeSize(5);
                     dataset6.setScatterShape(ScatterChart.ScatterShape.CIRCLE);
                     scatterChart.setData(data6);
-                    if(editText.getText()!=null){
+                    if (editText.getText() != null) {
                         scatterChart.animateX(Integer.parseInt(String.valueOf(editText.getText())));
                     }
                     btn6.setText("Off6");
@@ -326,7 +387,7 @@ public class Scatterchart extends AppCompatActivity implements View.OnClickListe
                     dataset7.setScatterShapeSize(5);
                     dataset7.setScatterShape(ScatterChart.ScatterShape.TRIANGLE);
                     scatterChart.setData(data7);
-                    if(editText.getText()!=null){
+                    if (editText.getText() != null) {
                         scatterChart.animateX(Integer.parseInt(String.valueOf(editText.getText())));
                     }
                     btn7.setText("Off7");
@@ -348,7 +409,7 @@ public class Scatterchart extends AppCompatActivity implements View.OnClickListe
                     dataset8.setScatterShapeSize(5);
                     dataset8.setScatterShape(ScatterChart.ScatterShape.CROSS);
                     scatterChart.setData(data8);
-                    if(editText.getText()!=null){
+                    if (editText.getText() != null) {
                         scatterChart.animateX(Integer.parseInt(String.valueOf(editText.getText())));
                     }
                     btn8.setText("Off8");
@@ -371,7 +432,7 @@ public class Scatterchart extends AppCompatActivity implements View.OnClickListe
                     dataset10.setScatterShapeSize(5);
                     dataset10.setScatterShape(ScatterChart.ScatterShape.CROSS);
                     scatterChart.setData(data10);
-                    if(editText.getText()!=null){
+                    if (editText.getText() != null) {
                         scatterChart.animateX(Integer.parseInt(String.valueOf(editText.getText())));
                     }
                     btn10.setText("All");
@@ -386,18 +447,28 @@ public class Scatterchart extends AppCompatActivity implements View.OnClickListe
                 break;
 
 
-
-
             default:
                 break;
         }
     }
-
+    @Override
+    protected void onStart() {
+        super.onStart();
+        // Bind to the service
+        bindService(new Intent(this, FileIOService.class), mConnection,
+                Context.BIND_AUTO_CREATE);
+    }
     protected void onStop() {
         super.onStop();
+        // Unbind from the service
+        if (mBound) {
+            unbindService(mConnection);
+            mBound = false;
+        }
         System.exit(0);
 
     }
+
 
 }
 
